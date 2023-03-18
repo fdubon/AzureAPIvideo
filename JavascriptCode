@@ -1,0 +1,68 @@
+
+  var k=2;
+  var j=0;
+  var fam="standard_D14";
+  var dict = { 
+      "australiaeast":"Adelaide",
+      "candacentral":"Montreal",
+      "eastus": "Montreal",
+      "eastus2": "Montreal",
+      "francecentral": "Paris",
+      "francesouth": "Paris",
+      "indiacentral":"Bangalore",
+      "indiasouth":"Bangalore",
+      "northcentralus": "Montreal",
+      "northeurope":"London",
+      "uksouth":"London",
+      "westeurope":"London",
+      }
+  
+
+function myFunction() {
+
+
+var originalLink = "https://prices.azure.com/api/retail/prices?currencyCode='USD'&$filter=serviceFamily eq 'Compute'";
+
+var response = UrlFetchApp.fetch(originalLink);
+  var data = JSON.parse(response);
+  
+  
+ 
+  var sheet = SpreadsheetApp.getActiveSheet();
+ 
+
+for ( i = 0; i < data.Items.length; i++) {
+    var meterName = data.Items[i].meterName;
+    var armSkuName = data.Items[i].armSkuName;
+    var retailPrice = data.Items[i].retailPrice;
+    var armRegionName = data.Items[i].armRegionName;
+    var location = data.Items[i].location;
+    var unitOfMeasure = data.Items[i].unitOfMeasure;
+    
+  
+  
+
+  sheet.getRange(k,1).setValue([armSkuName]); 
+  sheet.getRange(k,2).setValue([meterName]);
+
+ 
+  sheet.getRange(k,5).setValue([location]);
+  
+  
+  sheet.getRange(k,4).setValue(dict[data.Items[i].armRegionName]);
+
+  sheet.getRange(k,7).setValue([retailPrice]);
+  sheet.getRange(k,8).setValue([unitOfMeasure]);
+  
+  console.log(armSkuName);
+  console.log(retailPrice);
+  console.log(armRegionName);
+  console.log(data.Items[i]);
+  console.log(dict[data.Items[i].armRegionName]);
+
+  k++;
+  tclocation="none";
+  
+  }
+  
+}
