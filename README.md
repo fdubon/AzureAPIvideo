@@ -11,3 +11,7 @@ the Javascript code attached to this repository contains the code used in the vi
 3) paste this code and it will populate the data in the shown cells
 
 
+the Azure API documentation can be found here:
+
+https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices
+
